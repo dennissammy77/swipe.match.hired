@@ -16,13 +16,46 @@
 </head>
 <body>
     <div class="cards-container">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper"></div>
+        <div class="center-div no-jobs hidden">
+            <p class="text-xl">No jobs found. <br>Try a different search!</p>
+        </div>
+        <div class="justify-content-center">
+            <h1 class="text-xxl my-lg">Swipe<span class="text-primary ">.Match.</span>Hired</h1>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper"></div>
+            </div>
         </div>
     </div>
     <div class="form-container center-div">
-        <p style="font-size: xxx-large;">Swipe.Match.Hired</p>
+        <form class="p-lg w-full border box-shadow-md">
+            <div class="col my-lg">
+                <p class="text-lg text-center">
+                    A fun, fast, and engaging way <br>to find your next job—<span class="text-primary fw-bolder text-xl">just swipe!</span> 
+                </p>
+                <div class="row">
+                    <i class="fa-solid fa-info"></i>
+                    <h3 class="fw-bolder"></h3>
+                </div>
+            </div>
+            <div class="col my-lg">
+                <label for="jobTitle" class="fw-bolder" >Job Title</label>
+                <input type="text" class="FormControl my-md border box-shadow-md" placeholder="Full stack developer" id="jobTitle">
+            </div>
+            <div class="col my-lg">
+                <label for="location" class="fw-bolder">Location</label>
+                <input type="text" class="FormControl my-md border box-shadow-md" placeholder="Kenya,Nairobi" id="location">
+            </div>
+            <div class="col my-lg">
+                <label for="posted" class="fw-bolder">Date Posted</label>
+                <input type="date" class="FormControl my-md border box-shadow-md" placeholder="Kenya,Nairobi" id="location">
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary box-shadow-md border">Save</button>
+                <button type="reset" class="btn btn-secondary box-shadow-md border">Cancel</button>
+            </div>
+        </form>
     </div>
     <script src="./src/index.js"></script>
+    <script src="./src/api.js"></script>
 </body>
 </html>

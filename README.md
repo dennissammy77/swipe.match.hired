@@ -3,9 +3,9 @@ A fun, fast, and engaging way to find your next job—just swipe! Whether you're
 
 ## 📌 Features
 🎯 Swipe-Based Job Search
-Swipe Right 👉 to save or express interest in a job.
+Double tap to save or express interest in a job.
 
-Swipe Left 👈 to skip and move on.
+Swipe Right or left to shuffle.
 
 Swipe Up 👆 to view more job details.
 
