@@ -1,4 +1,10 @@
 {
+  "name":"swipe.match.hired",
+  "version": "1",
+  "author": {
+    "name": "Dennis Sammy",
+    "email": "dennissammy77@gmail.com"
+  },
   "dependencies": {
     "dotenv": "^16.4.7"
   }
