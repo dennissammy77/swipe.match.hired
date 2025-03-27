@@ -1,30 +1,35 @@
 # Swipe. Match. Hired. 🚀💼
 A fun, fast, and engaging way to find your next job—just swipe! Whether you're looking for your dream gig or just testing the waters, Swipe. Match. Hired. makes job hunting as easy as finding a date.
 
-## 📌 Features
-🎯 Swipe-Based Job Search
-Double tap to save or express interest in a job.
+### Author
+Dennis Sammy
+### Live Project
+[https://swipe-match-hired.onrender.com/]
 
-Swipe Right or left to shuffle.
+## 📌 Features Implemented
 
-Swipe Up 👆 to view more job details.
+### 🎯 Swipe-Based Job Search
+1. Double tap to save to express interest in a job.
 
-## 💘 Job Matching & Smart Recommendations
+2. Swipe, Right or left to shuffle.
+
+3. Swipe Up to view more job details.
+
+4. 🔍 Filters & Preferences
+Customize your job feed by location, industry.
+
+## Future Features
+1. ## 💘 Job Matching & Smart Recommendations
 Get job matches based on your profile, skills, and preferences.
 
-## ⚡ Quick & Easy Applications
+2. ## ⚡ Quick & Easy Applications
 One-Tap Apply for jobs with "Easy Apply."
 
 Pre-fill applications using your LinkedIn or Resume profile.
 
 Save jobs and apply later.
 
-## 🔍 Filters & Preferences
-Customize your job feed by location, industry, salary, and remote options.
-
-Enable "Only Remote" mode if you want work-from-anywhere gigs.
-
-Get alerts for trending jobs in your field.
+3. ## Get alerts for trending jobs in your field.
 
 ## 🚀 How It Works
 1️⃣ Create Your Profile 📝
@@ -38,4 +43,4 @@ Land your dream job with just a few swipes!
 
 ## 🛠️ Tech Stack
 Frontend: Html, CSS, VanillaJs
-Hosting: Githubpages
+Hosting: OnRender
