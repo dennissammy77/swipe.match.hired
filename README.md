@@ -13,7 +13,7 @@ Dennis Sammy
 
 2. Swipe, Right or left to shuffle.
 
-3. Swipe Up to view more job details.
+3. Swipe Up to visit more job details.
 
 4. 🔍 Filters & Preferences
 Customize your job feed by location, industry.

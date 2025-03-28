@@ -232,6 +232,9 @@ body{
     top: 5px;
     right: 5px;
 }
+#scroll-btn{
+    display: none;
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 768px) {
@@ -248,5 +251,8 @@ body{
     }
     .swiper {
         height: 34.75;
+    }
+    #scroll-btn{
+        display: inline;
     }
 };

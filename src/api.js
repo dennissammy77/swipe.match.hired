@@ -43,14 +43,14 @@ document.addEventListener("DOMContentLoaded",async function(){
                 const result = await response.json();
                 if (result && result.data.length > 0) {
                     // Get the first 100 jobs or fewer if there aren't that many
-                    // const first100Jobs = result.data.slice(0, 100);
+                    const first100Jobs = result.data.slice(0, 100);
             
                     // Store in localStorage
-                    localStorage.setItem('jobListings', JSON.stringify(result.data));
+                    localStorage.setItem('jobListings', JSON.stringify(first100Jobs));
             
-                    console.log('✅ Jobs stored in localStorage:', result.data);
+                    // console.log('Jobs stored in localStorage:', result.data);
                 } else {
-                    console.log('❌ No jobs found.');
+                    console.log('No jobs found.');
                 }
             }
         } catch (error) {
@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded",async function(){
                 slide.style.backgroundColor = 'var(--primary)';
                 slide.style.padding = '20px';
                 slide.style.position = 'relative';
+                slide.setAttribute('draggable',true)
     
                 // add contents elements
                 let timeBadge = document.createElement("div");
@@ -147,8 +148,31 @@ document.addEventListener("DOMContentLoaded",async function(){
                 slide.appendChild(timeBadge);
                 slide.appendChild(jobTitle);
                 slide.appendChild(companyDetailsDiv);
-    
+                
                 swiperWrapper.appendChild(slide);
+                
+                slide.addEventListener("dblclick", function(event) {
+                    const heart = document.createElement("span");
+                    console.log("Button double-clicked!");
+                    heart.textContent = "❤️";
+                    heart.style.position = "absolute";
+                    heart.style.left = `${event.clientX}px`;
+                    heart.style.top = `${event.clientY}px`;
+                    heart.style.fontSize = "84px";
+                    heart.style.zIndex = 1000;
+                    heart.style.transition = "opacity 0.8s ease-out";
+                    
+                    document.querySelector(".cards-container").appendChild(heart);
+
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.style.opacity = "0";
+                        setTimeout(() => heart.remove(), 800);
+                    }, 500);
+
+                    // save job for a later time use a json server
+
+                });
             });
         }else{
             // show no jobs found ui
@@ -181,7 +205,7 @@ document.addEventListener("DOMContentLoaded",async function(){
         // },
         mousewheel: {
             invert: false,
-        }
+        },
     });
 
     window.swiper = swiper;
