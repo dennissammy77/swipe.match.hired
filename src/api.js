@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded",async function(){
-    const jobPreferences =  document.getElementById("jobPreferences");
+    // Handle Display type i.e saved Jobs // allJobs
+    let displayType = localStorage.getItem('displayType');
+    displayType === 'allJobs'? document.getElementById('cancelSavedDb').classList.add('hidden') : document.getElementById('cancelSavedDb').classList.remove('hidden'); // 
     
-    displayJobListings()
-    
-    jobPreferences.addEventListener('submit',async(e)=>{
+    displayJobListings();
+    // form to save job preferences
+    document.getElementById("jobPreferences").addEventListener('submit',async(e)=>{
         e.preventDefault()
         
         let submitBtn = document.getElementById("saveBtn");
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             submitBtn.innerHTML = "Save"; // Restore button text
         }, 3000);
     });
-
+    // fetch cll
     async function fetchListings(jobTitle){
         localStorage.setItem('jobTitle', JSON.stringify(jobTitle));
         // https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=golang&locationId=92000000&datePosted=anyTime&sort=mostRelevant
@@ -64,21 +66,40 @@ document.addEventListener("DOMContentLoaded",async function(){
         clearDb();
         displayJobListings()
     });
+    // saved jobs
+    document.getElementById("savedDb").addEventListener('click',async(event)=>{
+        event.preventDefault();
+        localStorage.setItem('displayType', 'savedJobs');
+        document.getElementById('cancelSavedDb').classList.remove('hidden');
+        window.location.reload();
+    });
+    // show all jobs
+    document.getElementById("cancelSavedDb").addEventListener('click',async(event)=>{
+        event.preventDefault();
+        localStorage.setItem('displayType', 'allJobs');
+        document.getElementById('cancelSavedDb').classList.add('hidden')
+        ToggleJobsVisibility();
+        window.location.reload();
+    });
 
     function clearDb(){
         localStorage.removeItem("jobListings");
+        localStorage.removeItem("savedJobListings");
     };
 
     // display job listings
     function displayJobListings(){
         jobTitle.value = JSON.parse(localStorage.getItem('jobTitle'));
-
-        const swiperWrapper = document.querySelector(".swiper-wrapper");
+        
+        const swiperWrapper = document.querySelector('.swiper-wrapper')
         let jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
+        let savedJobListings = JSON.parse(localStorage.getItem('savedJobListings')) || [];
+        const data = displayType === 'allJobs'? jobListings : savedJobListings;
+        console.log(data)
 
-        if(jobListings.length > 0){
-            jobListings.sort((a, b) => new Date(b.postAt) - new Date(a.postAt));
-            jobListings.map((job)=>{
+        if(data.length > 0){
+            data.sort((a, b) => new Date(b.postAt) - new Date(a.postAt));
+            data.map((job)=>{
                 let slide = document.createElement("div");
                 slide.classList.add("swiper-slide","col","border", "box-shadow-md");    
                 slide.style.backgroundColor = 'var(--primary)';
@@ -150,40 +171,49 @@ document.addEventListener("DOMContentLoaded",async function(){
                 slide.appendChild(jobTitle);
                 slide.appendChild(companyDetailsDiv);
                 
-                swiperWrapper.appendChild(slide);
+                swiperWrapper.append(slide);
                 
                 slide.addEventListener("dblclick", function(event) {
-                    const heart = document.createElement("span");
-                    console.log("Button double-clicked!");
-                    heart.textContent = "❤️";
-                    heart.style.position = "absolute";
-                    heart.style.left = `${event.clientX}px`;
-                    heart.style.top = `${event.clientY}px`;
-                    heart.style.fontSize = "84px";
-                    heart.style.zIndex = 1000;
-                    heart.style.transition = "opacity 0.8s ease-out";
-                    
-                    document.querySelector(".cards-container").appendChild(heart);
+                    if(displayType === 'allJobs'){
+                        const heart = document.createElement("span");
+                        console.log("Button double-clicked!");
+                        heart.textContent = "❤️";
+                        heart.style.position = "absolute";
+                        heart.style.left = `${event.clientX}px`;
+                        heart.style.top = `${event.clientY}px`;
+                        heart.style.fontSize = "84px";
+                        heart.style.zIndex = 1000;
+                        heart.style.transition = "opacity 0.8s ease-out";
+                        
+                        document.querySelector(".cards-container").appendChild(heart);
+                        savedJobListings.push(job);
+                        localStorage.setItem('savedJobListings', JSON.stringify(savedJobListings));
+                        // Remove heart after animation
+                        setTimeout(() => {
+                            heart.style.opacity = "0";
+                            setTimeout(() => heart.remove(), 800);
+                        }, 1000);
+                    }
 
-                    // Remove heart after animation
                     setTimeout(() => {
-                        heart.style.opacity = "0";
-                        setTimeout(() => heart.remove(), 800);
+                        // route to view page
                         window.open(job.url, "_blank");
                     }, 1000);
 
-                    // route to view page
                     // save job for a later time use a json server
-                    
-
                 });
             });
         }else{
             // show no jobs found ui
-            document.querySelector('.no-jobs').classList.remove('hidden')
-            document.querySelector('.view-container').classList.add('hidden')
+            ToggleJobsVisibility()
         };
     };
+    // toggle container visibility
+    function ToggleJobsVisibility(){
+        // show no jobs found ui
+        document.querySelector('.no-jobs').classList.toggle('hidden')
+        document.querySelector('.view-container').classList.toggle('hidden')
+    }
 
     function formatTimestamp(timestamp) {
         let date = new Date(timestamp);
