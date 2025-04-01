@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",async function(){
     // Handle Display type i.e saved Jobs // allJobs
-    let displayType = localStorage.getItem('displayType');
+    let displayType = localStorage.getItem('displayType') || 'allJobs';
     displayType === 'allJobs'? document.getElementById('cancelSavedDb').classList.add('hidden') : document.getElementById('cancelSavedDb').classList.remove('hidden'); // 
     
     displayJobListings();
