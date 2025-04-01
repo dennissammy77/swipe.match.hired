@@ -26,13 +26,14 @@ document.addEventListener("DOMContentLoaded",async function(){
 
     async function fetchListings(jobTitle){
         localStorage.setItem('jobTitle', JSON.stringify(jobTitle));
+        // https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=golang&locationId=92000000&datePosted=anyTime&sort=mostRelevant
 
-        const url = `https://linkedin-data-api.p.rapidapi.com/search-jobs?keywords=${jobTitle}&locationId=100710459&datePosted=anyTime&sort=mostRelevant`;
+        const url = `https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=${jobTitle}&locationId=100710459&datePosted=anyTime&sort=mostRelevant`;
         const options = {
           method: 'GET',
           headers: {
             'x-rapidapi-key': '8bb0b33c9fmsh5db3bc8c9645717p107dfdjsna5195e6d6c9e',
-            'x-rapidapi-host': 'linkedin-data-api.p.rapidapi.com'
+            'x-rapidapi-host': 'linkedin-api8.p.rapidapi.com'
           }
         };
         
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded",async function(){
     
                 // add contents elements
                 let timeBadge = document.createElement("div");
-                timeBadge.textContent = `posted: ${formatTimestamp(job.postAt)}`;
+                timeBadge.textContent = `posted: ${job.postDate || formatTimestamp(job.postDate)}`;
                 timeBadge.style.position = "absolute";
                 timeBadge.style.top = "10px";
                 timeBadge.style.right = "10px";
@@ -119,7 +120,7 @@ document.addEventListener("DOMContentLoaded",async function(){
                 companyLogo.style.border = "1px solid white";
                 companyLogo.style.borderRadius = "5px";
                 companyLogo.src = job.company.logo;
-                companyLogo.akt = job.company.name;
+                companyLogo.alt = job.company.name;
     
     
                 // Company Name
