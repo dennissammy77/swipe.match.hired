@@ -84,11 +84,11 @@ document.addEventListener("DOMContentLoaded",async function(){
                 slide.style.backgroundColor = 'var(--primary)';
                 slide.style.padding = '20px';
                 slide.style.position = 'relative';
-                slide.setAttribute('draggable',true)
+                slide.setAttribute('draggable',true);
     
                 // add contents elements
                 let timeBadge = document.createElement("div");
-                timeBadge.textContent = `posted: ${job.postDate || formatTimestamp(job.postDate)}`;
+                timeBadge.textContent = `posted: ${formatTimestamp(job.postAt)}`;
                 timeBadge.style.position = "absolute";
                 timeBadge.style.top = "10px";
                 timeBadge.style.right = "10px";
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded",async function(){
                 jobTitle.style.textAlign = "center";
                 jobTitle.style.fontSize = "xx-large";
                 jobTitle.style.margin = "50px 0";
-    
+                   
     
                 let companyDetailsDiv = document.createElement("div");
                 companyDetailsDiv.classList.add('row','align-items-center')
@@ -169,9 +169,12 @@ document.addEventListener("DOMContentLoaded",async function(){
                     setTimeout(() => {
                         heart.style.opacity = "0";
                         setTimeout(() => heart.remove(), 800);
-                    }, 500);
+                        window.open(job.url, "_blank");
+                    }, 1000);
 
+                    // route to view page
                     // save job for a later time use a json server
+                    
 
                 });
             });
