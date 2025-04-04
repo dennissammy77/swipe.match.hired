@@ -26,6 +26,9 @@ a{
 
     color: var(--dark);
 }
+p{
+    margin: 0px;
+}
 .cards-container{
     grid-area: 1 / 1 / 2 / 3;
     display: flex;
@@ -53,11 +56,44 @@ a{
     align-items: center;
     justify-content: center;
     /* border-radius: 10px; */
-    /* border: 1px solid var(--dark); */
+    border: 1px solid var(--dark);
     color: var(--secondary);
+    background-color: var(--primary);
     position: relative;
     perspective: 1000px;
+    width: 18.75em;
 };
+.job-time-badge{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--secondary);
+    color: var(--dark);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.job-title{
+    font-size: 1.5em;
+    font-weight: 800;
+    color: var(--base);
+    text-align: center;
+    margin: 50px 0px;
+}
+.job-company-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.save-job{
+    font-size: 84px;
+    z-index: 1000;
+    position: absolute;
+    transition: opacity 0.8s ease-out; 
+}
 .no-jobs {
     font-size: 20px;
     color: var(--dark);
