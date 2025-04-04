@@ -1,0 +1,41 @@
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const dotenv = require("dotenv");
+
+// Load environment variables from .env file
+dotenv.config();
+
+const app = express();
+
+// Use CORS middleware to allow cross-origin requests
+app.use(cors({
+  credentials: true,
+  origin: '*',
+}));
+
+app.use(express.json());
+// Serve static files from the 'public' directory
+
+/* -------------------------------- Server Routes --------------------------------- */
+app.get('/api/jobs', (req, res) => {
+    res.json([
+        { id: 1, title: "Software Engineer", location: "Remote", company: "Company A" },
+        { id: 2, title: "Data Scientist", location: "On-site", company: "Company B" },
+        { id: 3, title: "Product Manager", location: "Hybrid", company: "Company C" },
+        // Add more job listings as needed
+    ]);
+});
+/* -------------------------------- Navigations --------------------------------- */
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/', 'index.html'));  // Serve static HTML file
+});
+app.get('/jobs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/', 'jobs.html'));  // Serve static HTML file
+});
+app.use((req, res, next) => {
+  res.status(404).send("Page Not Found");
+});
+
+module.exports = app;
