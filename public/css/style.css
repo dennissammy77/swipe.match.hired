@@ -99,7 +99,7 @@ p{
 .preferences-form{
     width: 50%;
 }
-.sign-in-form{
+.auth-form{
     width: 50%;
 }
 #mobile-menu-toggle{
@@ -344,7 +344,7 @@ p{
     .preferences-form{
         width: 100%;
     }
-    .sign-in-form{
+    .auth-form{
         width: 100%;
     }
     #mobile-menu-toggle{

@@ -47,6 +47,9 @@ app.get('/preferences', (req, res) => {
 app.get('/signin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/', 'signin.html'));
 });
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/', 'signup.html'));
+});
 app.use((req, res, next) => {
   res.status(404).send("Page Not Found");
 });

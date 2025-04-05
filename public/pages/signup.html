@@ -39,10 +39,10 @@
             <div class="d-flex flex-row justify-content-center align-items-center d-none" id="auth-active-actions">
                 <button class="btn-custom btn-custom-secondary box-shadow-md border mx-1" id="profile-btn">
                     <i class="fas fa-user"></i>
-                    <span class="my-0" id="profile-name">Sammy</span>
+                    <span class="my-0">Sammy</span>
                 </button>
                 <button class="btn-custom btn-custom-secondary box-shadow-md border mx-1 p-2" id="logout-btn">
-                    logout
+                    <i class="fas fa-sign-out-alt"></i>
                 </button>
             </div>
             <div class="d-flex flex-row auth-actions" id="auth-actions">
@@ -74,24 +74,33 @@
     </div>
     <!-- Body -->
     <div class="d-flex flex-column justify-content-center align-items-center text-center py-5 w-100" style="height: 100dvh;flex: 1">
-        <h1 class="my-md text-xxxl">Sign In</h1>
+        <h1 class="my-md text-xxxl">Create an Account</h1>
         <p class="text-xl">Welcome back.</p>
-        <!-- form to handle sign-in -->
-        <form id="signin-form" class="auth-form p-4 mt-4">
+        <form id="signup-form" class="auth-form p-4 mt-4">
+            <div class="mb-3 d-flex flex-column align-items-start">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="johndoe" required>
+            </div>
             <div class="mb-3 d-flex flex-column align-items-start">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="johndoe@gmail.com" required>
             </div>
             <div class="mb-3 d-flex flex-column align-items-start">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input type="tel" class="form-control" id="mobile" placeholder="0759233322" required>
+            </div>
+            <div class="mb-3 d-flex flex-column align-items-start">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="password" required>
             </div>
-            <button type="submit" class="btn-custom btn-custom-primary p-2 box-shadow-md border">sign in</button>
-            <p class="text-muted mt-2">Don't have an account? <a href="/signup">Sign Up</a></p>
-            <p class="text-muted">Forgot your password? <a href="/forgot-password">Reset Password</a></p>
+            <div class="mb-3 d-flex flex-column align-items-start">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password" placeholder="password" required>
+            </div>
+            <button type="submit" class="btn-custom btn-custom-primary p-2 box-shadow-md border">sign up</button>
         </form>
     </div>
-    <script src="../js/signin.js"></script>
+    <script src="../js/signup.js"></script>
     <script src="../js/index.js"></script>
 </body>
 </html>

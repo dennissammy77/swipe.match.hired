@@ -57,7 +57,7 @@ const CREATE_USER=(async(req,res)=>{
 	
 		const HASHED_PASSWORD = HASH_STRING(payload?.password);
 		const NEW_USER_BASE_MODEL = await USER_BASE_MODEL.create({
-			name:				payload?.first_name,
+			name:				payload?.name,
 			email:				payload?.email,
 			password:			HASHED_PASSWORD,
 			mobile:				payload?.mobile,
