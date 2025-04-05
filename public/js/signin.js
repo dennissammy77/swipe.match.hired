@@ -16,12 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Invalid email address");
                 return;
             };
-            // password regex
-            // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            // if (!passwordRegex.test(password)) {
-            //     alert("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character");
-            //     return;
-            // };
             const data = {
                 email: email,
                 password: password
@@ -49,11 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error("Error:", error);
-                alert("An error occurred. Please try again later.");
+                alert(`An error occurred. Please try again later.${error}`);
             });
         }catch (error) {
             console.error("Error:", error);
-            alert("An error occurred. Please try again later.");
+            alert(`An error occurred. Please try again later.${error}`);
         }
     });
 })

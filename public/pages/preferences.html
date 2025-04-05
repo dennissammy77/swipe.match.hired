@@ -46,8 +46,9 @@
                 </button>
             </div>
             <div class="d-flex flex-row auth-actions" id="auth-actions">
-                <button class="btn-custom btn-custom-secondary box-shadow-md border mx-2" id="login-btn">Login</button>
-                <button class="btn-custom btn-custom-primary box-shadow-md border d-none" id="signup-btn">Sign Up</button>
+                <a href="/signin" class="nav-link py-2 w-100 ">
+                    <button class="btn-custom btn-custom-secondary box-shadow-md border mx-2" id="login-btn">Login</button>
+                </a>
             </div>
         </nav>
         <div class="d-flex flex-column d-md-none px-4 py-3 d-none" id="mobile-nav">
@@ -62,7 +63,9 @@
             </div>
             <hr/>
             <div class="d-flex w-100 align-items-center">
-                <button class="btn-custom btn-custom-primary box-shadow-md border d-flex justify-content-center mx-auto p-4 text-xl w-100 me-2" id="login-btn-mobile">Login</button>
+                <a href="/signin" class="nav-link py-2 w-100 ">
+                    <button class="btn-custom btn-custom-primary box-shadow-md border d-flex justify-content-center mx-auto p-4 text-xl w-100 me-2" id="login-btn-mobile">Login</button>
+                </a>
                 <button class="btn-custom btn-custom-secondary box-shadow-md border d-flex justify-content-center mx-auto p-4 text-xl w-100 " type="button" id="close-mobile-menu-toggle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-x text-dark" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -186,7 +189,7 @@
         fetchLocations("kenya");
     </script>
     <script src="../js/api.js"></script>
-    <script src="../js/preferences.js"></script>
     <script src="../js/index.js"></script>
+    <script src="../js/preferences.js"></script>
 </body>
 </html>
