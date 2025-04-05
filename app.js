@@ -29,10 +29,13 @@ app.get('/api/jobs', (req, res) => {
 /* -------------------------------- Navigations --------------------------------- */
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/pages/', 'index.html'));  // Serve static HTML file
+  res.sendFile(path.join(__dirname, 'public/pages/', 'index.html'));
 });
 app.get('/jobs', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/pages/', 'jobs.html'));  // Serve static HTML file
+  res.sendFile(path.join(__dirname, 'public/pages/', 'jobs.html'));
+});
+app.get('/preferences', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/', 'preferences.html'));
 });
 app.use((req, res, next) => {
   res.status(404).send("Page Not Found");
