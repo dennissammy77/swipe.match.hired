@@ -99,6 +99,9 @@ p{
 .preferences-form{
     width: 50%;
 }
+.sign-in-form{
+    width: 50%;
+}
 #mobile-menu-toggle{
     display: none;
 }
@@ -339,6 +342,9 @@ p{
         font-size: 1.5em;
     }
     .preferences-form{
+        width: 100%;
+    }
+    .sign-in-form{
         width: 100%;
     }
     #mobile-menu-toggle{
