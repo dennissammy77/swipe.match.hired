@@ -12,11 +12,26 @@ async function fetchJobListings() {
         console.error("Error fetching jobs:", error);
     }
 }
-async function fetchListings(jobTitle){
-    localStorage.setItem('jobTitle', JSON.stringify(jobTitle));
+async function fetchListings(){
+    // localStorage.setItem('jobTitle', JSON.stringify(jobTitle));
+    // jobTitle,location='100710459'
     // https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=golang&locationId=92000000&datePosted=anyTime&sort=mostRelevant
 
-    const url = `https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=${jobTitle}&locationId=100710459&datePosted=anyTime&sort=mostRelevant`;
+    // fetch  job preferences from user data
+    const userId = decodeAuthToken().sub;
+    if(!userId){
+        alert("Please sign in or cleate an account");
+        throw new Error("User not authenticated");
+    }
+    const userData = await fetchUserData(userId);
+    const jobTitle = userData.preferences.jobTitle;
+    const location = extractGeoId(userData.preferences.location);
+    if(!jobTitle || !location){
+        alert("Please provide job title and location in your job preferences");
+        throw new Error("Job title or location not provided");
+    };
+    console.log(jobTitle, location)
+    const url = `https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=${jobTitle}&locationId=${location}&datePosted=anyTime&sort=mostRelevant`;
     const options = {
       method: 'GET',
       headers: {
@@ -32,10 +47,10 @@ async function fetchListings(jobTitle){
             const result = await response.json();
             if (result && result.data.length > 0) {
                 // Get the first 100 jobs or fewer if there aren't that many
-                const first100Jobs = result.data.slice(0, 100);
+                // const first100Jobs = result.data.slice(0, 100);
         
                 // Store in localStorage
-                localStorage.setItem('jobListings', JSON.stringify(first100Jobs));
+                localStorage.setItem('jobListings', JSON.stringify(result.data));
         
                 // console.log('Jobs stored in localStorage:', result.data);
             } else {
@@ -67,4 +82,10 @@ async function fetchUserData(userId) {
     } catch (error) {
         console.error("Error fetching user data:", error);
     }
+}
+function extractGeoId(urn) {
+    // urn = JSON.parse(urn)
+    console.log(urn)
+    const match = urn.match(/geo:(\d+)/);
+    return match ? match[1] : null;
 }

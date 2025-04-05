@@ -32,8 +32,8 @@ app.get('/api/jobs', (req, res) => {
         // Add more job listings as needed
     ]);
 });
-app.use('/api/signin', authController.SIGN_IN_USER);
-app.use('/api/signup', authController.CREATE_USER);
+app.post('/api/signin', authController.SIGN_IN_USER);
+app.post('/api/signup', authController.CREATE_USER);
 app.get('/api/users/:userid', userController.FETCH_USER_DATA);
 app.put('/api/users/:userid', userController.UPDATE_USER_DATA);
 /* -------------------------------- Navigations --------------------------------- */

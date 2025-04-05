@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",async function(){
     const jobsContainer = document.getElementById("jobs-container");
-    const jobs = JSON.parse(localStorage.getItem('jobListings')) || await fetchJobListings();
+    const jobs = JSON.parse(localStorage.getItem('jobListings')) || await fetchListings().then(()=>window.location.reload());
     class SwiperHandler {
         constructor(container) {
             this.container = container;
@@ -109,9 +109,7 @@ document.addEventListener("DOMContentLoaded",async function(){
         displayJobCards()
     } else {
         jobsContainer.innerHTML = `
-            <div class="center-div">
-                <p class="text-xxxl">No jobs found. <br>Try a different search!</p>
-            </div>
+            <p class="text-xxxl m-auto">No jobs found. <br>Try a different search!</p>
         `;
     }
     
