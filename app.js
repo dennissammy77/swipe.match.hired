@@ -4,6 +4,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const db = require("./config/database.js");
 const authController = require("./controllers/auth.controller.js");
+const userController = require("./controllers/user.controller.js");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -33,6 +34,8 @@ app.get('/api/jobs', (req, res) => {
 });
 app.use('/api/signin', authController.SIGN_IN_USER);
 app.use('/api/signup', authController.CREATE_USER);
+app.get('/api/users/:userid', userController.FETCH_USER_DATA);
+app.put('/api/users/:userid', userController.UPDATE_USER_DATA);
 /* -------------------------------- Navigations --------------------------------- */
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
@@ -49,6 +52,9 @@ app.get('/signin', (req, res) => {
 });
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/', 'signup.html'));
+});
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/', 'profile.html'));
 });
 app.use((req, res, next) => {
   res.status(404).send("Page Not Found");

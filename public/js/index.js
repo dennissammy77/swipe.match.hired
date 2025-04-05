@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const profileNameElement = document.getElementById("profile-name");
         profileNameElement.textContent = profileName;
 
-        const profileButton = document.getElementById("profile-button");
+        const profileButton = document.getElementById("profile-btn");
         profileButton.addEventListener("click", () => {
             window.location.href = "/profile";
         });

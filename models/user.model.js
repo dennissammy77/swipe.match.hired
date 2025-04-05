@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  linkedInId: { type: String},
+  linkedInUrl: { type: String},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true},
   name: { type: String },
+  profile_url: { type: String },
   mobile: { type: String },
   headline: { type: String }, // e.g. "Software Engineer at XYZ"
   location: { type: String },
   preferences: {
-    jobTypes: [String], // e.g. ['Full-time', 'Remote']
-    industries: [String], // e.g. ['Tech', 'Finance']
-    locations: [String], // e.g. ['New York', 'Kenya']
+    jobTitle: String, // e.g. Full stack developer
+    jobTypes: String, // e.g. ['Full-time', 'Remote']
+    industries: String, // e.g. ['Tech', 'Finance']
+    locations: String, // e.g. ['New York', 'Kenya']
     experienceLevel: String, // e.g. "Mid", "Senior"
     experienceYears: String // e.g. "0-1", "1-3", "3-5", "5+"
   },

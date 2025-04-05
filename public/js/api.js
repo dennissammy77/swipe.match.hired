@@ -46,4 +46,25 @@ async function fetchListings(jobTitle){
         console.error(error);
     }
 };
-fetchListings('Full Stack developer')
+// decode authToken
+function decodeAuthToken() {
+    const token = localStorage.getItem("swipe.match.hired-accessToken");
+    if (!token) return null;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (!payload) return null;
+    return payload;
+}
+// fetchListings('Full Stack developer')
+async function fetchUserData(userId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/users/${userId}`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch user data");
+        }
+        const data = await response.json();
+        console.log("User Data:", data);
+        return data.data;
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+}
