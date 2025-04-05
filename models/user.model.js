@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema({
   location: { type: String },
   preferences: {
     jobTitle: String, // e.g. Full stack developer
-    jobTypes: String, // e.g. ['Full-time', 'Remote']
+    jobType: String, // e.g. ['Full-time', 'Remote']
     industries: String, // e.g. ['Tech', 'Finance']
-    locations: String, // e.g. ['New York', 'Kenya']
+    location: { id: String, name: String}, // e.g. ['New York', 'Kenya']
     experienceLevel: String, // e.g. "Mid", "Senior"
     experienceYears: String // e.g. "0-1", "1-3", "3-5", "5+"
   },

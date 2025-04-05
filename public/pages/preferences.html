@@ -80,15 +80,18 @@
         <form id="preferences-form" class="preferences-form p-4 mt-4">
             <div class="mb-3 d-flex flex-column align-items-start">
                 <label for="Job title" class="form-label">Job title</label>
-                <input type="text" class="form-control" id="jobtitle" placeholder="Enter your preferred Job title">
+                <input type="text" class="form-control" id="jobTitle" placeholder="Enter your preferred Job title" required>
             </div>
             <div class="mb-3 d-flex flex-column align-items-start">
                 <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" placeholder="Enter your preferred location">
+                <!-- <input type="text" class="form-control" id="location" placeholder="Enter your preferred location" required> -->
+                <input list="location-list" id="location-input" class="form-control" placeholder="Enter your preferred location..." />
+                <datalist id="location-list"></datalist>
+                <input type="hidden" name="location-data" id="hidden-location-data">
             </div>
             <div class="mb-3 d-flex flex-column align-items-start">
                 <label for="job-type" class="form-label">Job Type</label>
-                <select class="form-select" id="job-type">
+                <select class="form-select" id="jobType" required>
                     <option value="" disabled selected>Select job type</option>
                     <option value="full-time">Full-time</option>
                     <option value="part-time">Part-time</option>
@@ -96,10 +99,94 @@
                     <option value="internship">Internship</option>
                 </select>
             </div>
+            
+
+            <!-- Optional: To display saved object -->
+            <pre id="selected-object" class="mt-3"></pre>
             <button type="submit" class="btn-custom btn-custom-primary p-2 box-shadow-md border">Save Preferences</button>
         </form>
     </div>
+    <script>
+        const input = document.getElementById("location-input");
+        const datalist = document.getElementById("location-list");
+        const display = document.getElementById("selected-object");
+      
+        let locations = []; // store results here
+      
+        async function fetchLocations(keyword = "kenya") {
+            // Check if locations are already stored in local storage
+            const storedLocations = localStorage.getItem(`${keyword}-location`);
+            if (storedLocations) {
+              locations = JSON.parse(storedLocations);
+              // Populate datalist with stored locations
+              datalist.innerHTML = "";
+              locations.forEach(loc => {
+                const option = document.createElement("option");
+                option.value = loc.name;
+                datalist.appendChild(option);
+              });
+              return;
+            }
+            const url = `https://linkedin-api8.p.rapidapi.com/search-locations?keyword=${encodeURIComponent(keyword)}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                'x-rapidapi-key': '8bb0b33c9fmsh5db3bc8c9645717p107dfdjsna5195e6d6c9e',
+                'x-rapidapi-host': 'linkedin-api8.p.rapidapi.com'
+                }
+            };
+        
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json();
+                console.log("API response:", result);
+        
+                // Assume API returns an array of location objects with `id` and `name`
+                locations = result.data.items || []; // fallback in case API wraps in `data`
+                // store locations to prevent calling the api every time
+                localStorage.setItem(`${keyword}-location`, JSON.stringify(locations));      
+                // Clear and populate datalist
+                datalist.innerHTML = "";
+                locations.forEach(loc => {
+                const option = document.createElement("option");
+                option.value = loc.name;
+                datalist.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Error fetching locations:", error);
+            }
+        };
+        function debounce(func, delay = 300) {
+            let timeoutId;
+            return (...args) => {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                func(...args);
+                }, delay);
+            };
+        }
+        const debouncedFetchLocations = debounce(fetchLocations, 2000);
+      
+        // Listen for input and fetch matching locations
+        input.addEventListener("input", () => {
+          const selectedName = input.value;
+      
+          // Search for exact match
+          const selectedObj = locations.find(loc => loc.name === selectedName);
+          if (selectedObj) {
+            console.log("Selected Object:", selectedObj);
+            document.getElementById("hidden-location-data").value = JSON.stringify(selectedObj);
+          } else {
+            // Optional: search LinkedIn API as user types
+            debouncedFetchLocations(selectedName);
+          }
+        });
+      
+        // Initial load
+        fetchLocations("kenya");
+    </script>
     <script src="../js/api.js"></script>
+    <script src="../js/preferences.js"></script>
     <script src="../js/index.js"></script>
 </body>
 </html>
