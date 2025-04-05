@@ -2,10 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const db = require("./config/database.js");
+const authController = require("./controllers/auth.controller.js");
 
 // Load environment variables from .env file
 dotenv.config();
+// initialize the db
+db.connect();
 
+// initialize the app
 const app = express();
 
 // Use CORS middleware to allow cross-origin requests
@@ -26,6 +31,8 @@ app.get('/api/jobs', (req, res) => {
         // Add more job listings as needed
     ]);
 });
+app.use('/api/signin', authController.SIGN_IN_USER);
+app.use('/api/signup', authController.CREATE_USER);
 /* -------------------------------- Navigations --------------------------------- */
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
@@ -36,6 +43,9 @@ app.get('/jobs', (req, res) => {
 });
 app.get('/preferences', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/', 'preferences.html'));
+});
+app.get('/signin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/pages/', 'signin.html'));
 });
 app.use((req, res, next) => {
   res.status(404).send("Page Not Found");
