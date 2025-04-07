@@ -15,8 +15,8 @@ const listJobs=async(req, res)=>{
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': '8bb0b33c9fmsh5db3bc8c9645717p107dfdjsna5195e6d6c9e',
-                'x-rapidapi-host': 'linkedin-api8.p.rapidapi.com'
+                'x-rapidapi-key': process.env.VITE_RAPIDAPI_KEY,
+                'x-rapidapi-host': process.env.VITE_RAPIDAPI_HOST
             }
         };
         const response = await fetch(url, options);
