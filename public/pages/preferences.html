@@ -147,7 +147,7 @@
                 console.log("API response:", result);
         
                 // Assume API returns an array of location objects with `id` and `name`
-                locations = result.data.items || []; // fallback in case API wraps in `data`
+                locations = result?.data?.items || []; // fallback in case API wraps in `data`
                 // store locations to prevent calling the api every time
                 localStorage.setItem(`${keyword}-location`, JSON.stringify(locations));      
                 // Clear and populate datalist
