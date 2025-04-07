@@ -4,13 +4,13 @@ const FETCH_USER_DATA=(async(req,res)=>{
     console.log('info',`Fetching user details, id:${req.params.userid}`)
     const USER_ID = req.params.userid;
     try{
-        const EXISTING_ACCOUNT = await USER_BASE_MODEL.findById(USER_ID);
-        if (!EXISTING_ACCOUNT){
+        const user = await USER_BASE_MODEL.findById(USER_ID);
+        if (!user){
             return res.status(200).send({error:true,message:'This User does not have an existing account'});
         };
         return res.status(200).send({
             error:false,
-            data:EXISTING_ACCOUNT
+            data:user
         });
     }catch(error){
 		console.error(error)

@@ -33,6 +33,7 @@ app.post('/api/signup', authController.CREATE_USER);
 app.get('/api/users/:userid', cache(3000), userController.FETCH_USER_DATA);
 app.put('/api/users/:userid', userController.UPDATE_USER_DATA);
 app.get('/api/jobs', AUTHENTICATE_TOKEN, cache(3000), jobsController.listJobs);
+app.put('/api/jobs/save', AUTHENTICATE_TOKEN, jobsController.savedJob);
 /* -------------------------------- Navigations --------------------------------- */
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {

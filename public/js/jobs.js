@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded",async function(){
         addCard(job) {
             const card = document.createElement('div');
             card.classList.add("swiper-slide","border", "box-shadow-md","p-4");
-            this.createJobContents(job.title, job.postAt, job.company.name, job.company.logo, job.location,card);
+            this.createJobContents(job.title, job.postAt, job.company.name, job.company.logo, job.location,job.saved,card);
             this.swiperWrapper.appendChild(card);
             const hammer = new Hammer(card);
             hammer.get("swipe").set({ direction: Hammer.DIRECTION_VERTICAL  });
@@ -36,11 +36,24 @@ document.addEventListener("DOMContentLoaded",async function(){
             });
             hammer.on("swipeup", () => window.open(job.url, "_blank"));
         }
-        createJobContents(title, date, name, logo, location,card){
+        createJobContents(title, date, name, logo, location,saved,card){
             // date
             const timeBadge = document.createElement("div")
             timeBadge.textContent = `${this.formatTimestamp(date)}`;
             timeBadge.classList.add("job-time-badge");
+            // add a saved button element if exysts on job
+            if(saved){
+                const savedButton = document.createElement("button");
+                savedButton.textContent = "Saved ❤️";
+                savedButton.classList.add("btn-custom-secondary","box-shadow-md","border");
+                savedButton.style="position: absolute; top: 10px; right: 10px;";
+                card.appendChild(savedButton);
+            }
+            // company logo
+            const logoElement = document.createElement("img");
+            logoElement.src = logo;
+            logoElement.alt = "logo";
+            logoElement.classList.add("job-logo");
             // title
             const titleElement = document.createElement("h2");
             titleElement.textContent = title;
@@ -60,7 +73,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             card.appendChild(titleElement);
             card.appendChild(companyDetails);
         };
-        saveJob(job,event,card){
+        async saveJob(job,event,card){
             const heart = document.createElement("span");
             const rect = card.getBoundingClientRect(); // Get the card's position and size
             let x = event.center.x - rect.left;
@@ -73,7 +86,16 @@ document.addEventListener("DOMContentLoaded",async function(){
             heart.style.top = `${Math.abs(y)}px`;
 
             card.appendChild(heart);
-
+            // save job to db
+            await saveJob({
+                jobDetails: JSON.stringify(job), 
+                jobId: job.id,
+                savedAt: new Date(Date.now()),
+                coverLetter: '', // cover letter created by AI
+                resumeUrl: '', // resume created by AI
+                atsScore: 0, // score created by AI
+                status: "saved" // e.g. "Applied", "Interviewed", "Offered", "Declined"
+            });
             this.savedJobListings.push(job);
             localStorage.setItem('savedJobListings', JSON.stringify(this.savedJobListings));
             setTimeout(() => {

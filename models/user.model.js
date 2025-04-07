@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
   savedJobs: [
     {
       jobId: String,
+      jobDetails: String,
       savedAt: Date,
       coverLetter: String, // cover letter created by AI
       resumeUrl: String, // resume created by AI

@@ -23,6 +23,32 @@ async function fetchJobListings() {
     } catch (error) {
         console.error("Error fetching jobs:", error);
     }
+};
+async function saveJob(payload){
+    try {
+        const token = localStorage.getItem('swipe.match.hired-accessToken');
+        if (!token) {
+            alert("Please sign in or create an account");
+            throw new Error("User not authenticated");
+        }
+        const requestOptions = {
+            method: 'PUT',
+            headers : {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        };
+        const response = await fetch("/api/jobs/save", requestOptions);
+        if (!response.ok) {
+            throw new Error("Failed to save job");
+        }
+        const data = await response.json();
+        console.log(data.message);
+        return alert(data.message)
+    } catch (error) {
+        console.error("Error saving job:", error);
+    }
 }
 async function fetchListings(){
     // localStorage.setItem('jobTitle', JSON.stringify(jobTitle));
@@ -82,7 +108,8 @@ function decodeAuthToken() {
     return payload;
 }
 // fetchListings('Full Stack developer')
-async function fetchUserData(userId) {
+async function fetchUserData() {
+    const userId = decodeAuthToken().sub;
     try {
         const response = await fetch(`/api/users/${userId}`);
         if (!response.ok) {
