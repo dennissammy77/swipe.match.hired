@@ -1,8 +1,8 @@
 const USER_BASE_MODEL = require("../models/user.model.js");
 
 const FETCH_USER_DATA=(async(req,res)=>{
-    console.log('info',`Fetching user details, id:${req.params.userid}`)
-    const USER_ID = req.params.userid;
+    // console.log('info',`Fetching user details, id:${req.params.userid}`)
+    const USER_ID = req.user.sub; 
     try{
         const user = await USER_BASE_MODEL.findById(USER_ID);
         if (!user){
@@ -15,7 +15,7 @@ const FETCH_USER_DATA=(async(req,res)=>{
     }catch(error){
 		console.error(error)
         console.log('error',`System Error-[Fetching user details, id:${USER_ID}]`)
-        return res.sendStatus(500);
+        return res.status(500);
     }
 });
 
