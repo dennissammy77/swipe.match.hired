@@ -33,11 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/profile";
         });
         // handle logout button
-        const logoutButton = document.getElementById("logout-button");
+        const logoutButton = document.getElementById("logout-btn");
         logoutButton.addEventListener("click", () => {
+            alert("successfully logged out");
             localStorage.removeItem("swipe.match.hired-accessToken");
             window.location.href = "/";
         });
+        // update login button to show profile
+        document.querySelector(".login-btn-mobile").href='/profile';
+        document.querySelector(".login-btn-mobile button[id='login-btn-mobile']").textContent='Profile';
+
     } else {
         const authActionContainer = document.getElementById("auth-actions");
         authActionContainer.classList.remove("d-none");
@@ -45,5 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const profileContainer = document.getElementById("auth-active-actions");
         profileContainer.classList.add("d-none");
+                // update profile button to show login
+                document.querySelector(".login-btn-mobile").href='/';
+                document.querySelector(".login-btn-mobile button[id='login-btn-mobile']").textContent='login';
     }
 })
