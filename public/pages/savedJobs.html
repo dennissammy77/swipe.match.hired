@@ -78,46 +78,9 @@
         </div>
     </div>
     <!-- Body -->
-    <div class="d-flex flex-column justify-content-center align-items-center text-center py-5 w-100" style="height: 100vh;flex: 1;overflow-y: scroll;">
-        <img src="https://avatar.iran.liara.run/public/31" alt="" class="profile-pic border box-shadow-md mt-4 rounded-circle" width="100px" height="100px" id="profile-pic">
-        <h1 class="my-md text-xxxl" id="profile">User</h1>
-        <p id="profile-headline">software engineer</p>
-        <form id="profile-form" class="auth-form p-4">
-            <div class="mb-3 d-flex flex-column align-items-start">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="johndoe" required>
-            </div>
-            <div class="d-flex flex-row w-100">
-                <div class="mb-3 d-flex flex-column align-items-start w-100 me-2">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="johndoe@gmail.com" required>
-                </div>
-                <div class="mb-3 d-flex flex-column align-items-start w-100">
-                    <label for="mobile" class="form-label">Mobile</label>
-                    <input type="tel" class="form-control" id="mobile" placeholder="0759233322" required>
-                </div>
-            </div>
-            <div class="mb-3 d-flex flex-column align-items-start">
-                <label for="linkedin" class="form-label">LinkedIn profile Url</label>
-                <input type="text" class="form-control" id="linkedin" placeholder="https://www.linkedin.com/in/dennis-sammy-b1772b230/">
-            </div>
-            <div class="mb-3 d-flex flex-column align-items-start">
-                <label for="headline" class="form-label">LinkedIn Headline</label>
-                <textarea class="form-control" id="headline" placeholder="Software Engineer at XYZ"></textarea>
-            </div>
-            <div class="mb-3 d-flex flex-column align-items-start">
-                <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" placeholder="Kenya, Nairobi">
-            </div>
-            <div class="mb-3 d-flex flex-column align-items-start">
-                <label for="resume" class="form-label">Resume</label>
-                <input type="file" class="form-control" id="resume" placeholder="Resume" disabled>
-            </div>            
-            <button type="submit" class="btn-custom btn-custom-primary p-2 box-shadow-md border">save</button>
-        </form>
-    </div>
+    <div id="jobs-container" class="jobs-container d-flex justify-content-center align-items-center"></div>
     <script src="../js/api.js"></script>
-    <script src="../js/profile.js"></script>
+    <script src="../js/savedjobs.js"></script>
     <script src="../js/index.js"></script>
 </body>
 </html>
