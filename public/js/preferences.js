@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", async function () {
     // populate form fields with current job preferences
-    const userId = decodeAuthToken().sub;
-    let jobPreferences = await fetchUserData(userId);
+    let jobPreferences = await fetchUserData();
+    if (!jobPreferences) {
+        throw new Error("User not authenticated");
+    }
     jobPreferences = jobPreferences.preferences;
     console.log(jobPreferences);
 
