@@ -23,10 +23,10 @@ const listJobs=async(req, res)=>{
         const result = await response.json();
         // attach if job is saved from user saved lists
         const savedJobs = user.savedJobs.map(job => job.jobId);
-        result.data.forEach(job => {
-            job.saved = savedJobs.includes(job.id);
-        });
         if (result && result.data.length > 0) {
+            result.data.forEach(job => {
+                job.saved = savedJobs.includes(job.id);
+            });
             return res.status(200).json({error: false, data: result.data});
         }else {
             return res.status(200).json({error: false, data: []});
