@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const profileContainer = document.getElementById("auth-active-actions");
         profileContainer.classList.add("d-none");
-                // update profile button to show login
-                document.querySelector(".login-btn-mobile").href='/';
-                document.querySelector(".login-btn-mobile button[id='login-btn-mobile']").textContent='login';
+        // update profile button to show login
+        document.querySelector(".login-btn-mobile").href='/signin';
+        document.querySelector(".login-btn-mobile button[id='login-btn-mobile']").textContent='login';
     }
 })
