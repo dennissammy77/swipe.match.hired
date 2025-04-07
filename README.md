@@ -1,5 +1,5 @@
 # Swipe. Match. Hired. 🚀💼
-A fun, fast, and engaging way to find your next job—just swipe! Whether you're looking for your dream gig or just testing the waters, Swipe. Match. Hired. makes job hunting as easy as finding a date.
+A fun, fast, and engaging way to find your next job—just swipe! Whether you're looking for your dream Job or just testing the waters, Swipe. Match. Hired. makes job hunting as easy as finding a date.
 
 ### Author
 Dennis Sammy
@@ -13,10 +13,10 @@ Dennis Sammy
 
 2. Swipe, Right or left to shuffle.
 
-3. Swipe Up to visit more job details.
+3. Swipe Up to visit job details.
 
 4. 🔍 Filters & Preferences
-Customize your job feed by location, industry.
+Customize your job feed by location, job title.
 
 ## Future Features
 1. ## 💘 Job Matching & Smart Recommendations
@@ -42,5 +42,6 @@ Browse jobs and swipe to save, skip, or learn more.
 Land your dream job with just a few swipes!
 
 ## 🛠️ Tech Stack
-Frontend: Html, CSS, VanillaJs
+Frontend: Html, Boostrap Css, VanillaJs, 
+BackEnd: ExpressJs, NodeJs
 Hosting: OnRender
