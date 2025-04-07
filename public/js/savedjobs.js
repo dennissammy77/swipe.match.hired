@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded",async function(){
     const jobsContainer = document.getElementById("jobs-container");
+    jobsContainer.innerHTML=`
+        <iframe src="https://lottie.host/embed/5896ca3d-2be5-4ad2-94f3-c3a0676447d3/XD6BLVwU0U.lottie"></iframe>
+    `
     const user = await fetchUserData();
     const jobs = user?.savedJobs
     class SwiperHandler {
         constructor(container) {
             this.container = container;
             this.setup();
-            this.savedJobListings = JSON.parse(localStorage.getItem('savedJobListings')) || [];
         }
-        setup() {
-            this.container.innerHTML = ``;
-        
+        setup() {        
             // Create Swiper container
             this.swiperContainer = document.createElement('div');
             this.swiperContainer.classList.add('swiper');
@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded",async function(){
 
             // Append wrapper inside container
             this.swiperContainer.appendChild(this.swiperWrapper);
+        }
+        mount(){
+            this.container.innerHTML = ``;
             this.container.appendChild(this.swiperContainer);
         }
         addCard(job) {
@@ -90,8 +93,6 @@ document.addEventListener("DOMContentLoaded",async function(){
                 atsScore: 0, // score created by AI
                 status: "saved" // e.g. "Applied", "Interviewed", "Offered", "Declined"
             });
-            this.savedJobListings.push(job);
-            localStorage.setItem('savedJobListings', JSON.stringify(this.savedJobListings));
             setTimeout(() => {
                 heart.style.opacity = 0;
                 setTimeout(() => {
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             job = JSON.parse(job?.jobDetails)
             swiperController.addCard(job);
         });
+        swiperController.mount();
         // Initialize Swiper AFTER cards are added
         swiperController.initSwiper();
     }
