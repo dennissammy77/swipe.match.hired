@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 app.get('/jobs', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/', 'jobs.html'));
 });
-app.get('/jobs/saved', (req, res) => {
+app.get('/jobssaved', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/pages/', 'savedjobs.html'));
 });
 app.get('/preferences', (req, res) => {
