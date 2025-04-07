@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const db = require("./config/database.js");
 
 const { AUTHENTICATE_TOKEN } = require("./middlewares/TOKEN_VERIFIER.middleware.js");
-const cache = require("./middlewares/routeCache.js");
+const { cache } = require("./middlewares/routeCache.js");
 const authController = require("./controllers/auth.controller.js");
 const userController = require("./controllers/user.controller.js");
 const jobsController = require("./controllers/jobs.controller.js");
@@ -30,9 +30,9 @@ app.use(express.json());
 /* -------------------------------- Server Routes --------------------------------- */
 app.post('/api/signin', authController.SIGN_IN_USER);
 app.post('/api/signup', authController.CREATE_USER);
-app.get('/api/users/:userid',AUTHENTICATE_TOKEN, cache(3000), userController.FETCH_USER_DATA);
+app.get('/api/users/:userid',AUTHENTICATE_TOKEN, cache(3000),userController.FETCH_USER_DATA);
 app.put('/api/users/:userid', userController.UPDATE_USER_DATA);
-app.get('/api/jobs', AUTHENTICATE_TOKEN, cache(3000), jobsController.listJobs);
+app.get('/api/jobs', AUTHENTICATE_TOKEN,cache(3000), jobsController.listJobs);
 app.put('/api/jobs/save', AUTHENTICATE_TOKEN, jobsController.savedJob);
 /* -------------------------------- Navigations --------------------------------- */
 app.use(express.static(path.join(__dirname, 'public')));

@@ -18,7 +18,7 @@ async function fetchJobListings() {
             throw new Error("Failed to fetch job listings");
         }
         const data = await response.json();
-        console.log("Job Listings:", data.data);
+        // console.log("Job Listings:", data.data);
         return data.data;
     } catch (error) {
         console.error("Error fetching jobs:", error);

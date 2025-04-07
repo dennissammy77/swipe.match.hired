@@ -10,7 +10,8 @@ const listJobs=async(req, res)=>{
         const location = extractGeoId(JSON.parse(user.preferences.location).id);
         if(!jobTitle ||!location){
             return res.status(400).json({error: true, message: 'Job title and location are required.'});
-        }
+        };
+        
         const url = `https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=${jobTitle}&locationId=${location}&datePosted=anyTime&sort=mostRelevant`;
         const options = {
             method: 'GET',
@@ -21,10 +22,11 @@ const listJobs=async(req, res)=>{
         };
         const response = await fetch(url, options);
         const result = await response.json();
+        console.log(result)
         // attach if job is saved from user saved lists
         const savedJobs = user.savedJobs.map(job => job.jobId);
-        if (result && result.data.length > 0) {
-            result.data.forEach(job => {
+        if (result && result?.data?.length > 0) {
+            result?.data?.forEach(job => {
                 job.saved = savedJobs.includes(job.id);
             });
             return res.status(200).json({error: false, data: result.data});

@@ -1,4 +1,5 @@
 const USER_BASE_MODEL = require("../models/user.model.js");
+const { clearUserCache } = require('../middlewares/routeCache');
 
 const FETCH_USER_DATA=(async(req,res)=>{
     // console.log('info',`Fetching user details, id:${req.params.userid}`)
@@ -28,6 +29,8 @@ const UPDATE_USER_DATA=(async(req,res)=>{
         if (!EXISTING_ACCOUNT){
             return res.status(200).send({error:true,message:'This User does not have an existing account'});
         };
+        // Clear user's cache after updating it.
+        clearUserCache(USER_ID);  
         return res.status(200).send({
             error:false,
             data:EXISTING_ACCOUNT
