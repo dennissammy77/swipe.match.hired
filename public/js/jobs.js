@@ -96,8 +96,6 @@ document.addEventListener("DOMContentLoaded",async function(){
                 atsScore: 0, // score created by AI
                 status: "saved" // e.g. "Applied", "Interviewed", "Offered", "Declined"
             });
-            this.savedJobListings.push(job);
-            localStorage.setItem('savedJobListings', JSON.stringify(this.savedJobListings));
             setTimeout(() => {
                 heart.style.opacity = 0;
                 setTimeout(() => {

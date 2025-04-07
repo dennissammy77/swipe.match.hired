@@ -1,4 +1,5 @@
 const USER_BASE_MODEL = require("../models/user.model.js");
+const { clearUserCache } = require('../middlewares/routeCache');
 
 const listJobs=async(req, res)=>{
     try{
@@ -22,7 +23,6 @@ const listJobs=async(req, res)=>{
         };
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result)
         // attach if job is saved from user saved lists
         const savedJobs = user.savedJobs.map(job => job.jobId);
         if (result && result?.data?.length > 0) {
@@ -49,8 +49,6 @@ const savedJob=async(req,res)=>{
         const jobToSave = req.body; // assuming it includes jobId and maybe job data
         const jobIdToSave = jobToSave.jobId;
 
-        console.log(userId)
-        // const user = await USER_BASE_MODEL.findByIdAndUpdate(userId, {$push: {savedJobs: req.body}}, {new: true});
         const user = await USER_BASE_MODEL.findById(userId,{savedJobs:1});
         if (!user){
             return res.status(200).send({error:true,message:'This User does not have an existing account'});
@@ -65,6 +63,8 @@ const savedJob=async(req,res)=>{
         user.savedJobs.push(jobToSave);
         await user.save();
         console.log('Job saved successfully');
+        
+        clearUserCache(userId);
 
         return res.status(200).send({
             error: false,
