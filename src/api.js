@@ -172,8 +172,9 @@ document.addEventListener("DOMContentLoaded",async function(){
                 slide.appendChild(companyDetailsDiv);
                 
                 swiperWrapper.append(slide);
-                
-                slide.addEventListener("dblclick", function(event) {
+                const hammer = new Hammer(slide);
+
+                hammer.on("doubletap", () => {
                     if(displayType === 'allJobs'){
                         const heart = document.createElement("span");
                         console.log("Button double-clicked!");
@@ -199,8 +200,6 @@ document.addEventListener("DOMContentLoaded",async function(){
                         // route to view page
                         window.open(job.url, "_blank");
                     }, 1000);
-
-                    // save job for a later time use a json server
                 });
             });
         }else{
