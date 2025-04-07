@@ -3,8 +3,12 @@ const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
 const db = require("./config/database.js");
+
+const { AUTHENTICATE_TOKEN } = require("./middlewares/TOKEN_VERIFIER.middleware.js");
+const cache = require("./middlewares/routeCache.js");
 const authController = require("./controllers/auth.controller.js");
 const userController = require("./controllers/user.controller.js");
+const jobsController = require("./controllers/jobs.controller.js");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -24,18 +28,11 @@ app.use(express.json());
 // Serve static files from the 'public' directory
 
 /* -------------------------------- Server Routes --------------------------------- */
-app.get('/api/jobs', (req, res) => {
-    res.json([
-        { id: 1, title: "Software Engineer", location: "Remote", company: "Company A" },
-        { id: 2, title: "Data Scientist", location: "On-site", company: "Company B" },
-        { id: 3, title: "Product Manager", location: "Hybrid", company: "Company C" },
-        // Add more job listings as needed
-    ]);
-});
 app.post('/api/signin', authController.SIGN_IN_USER);
 app.post('/api/signup', authController.CREATE_USER);
-app.get('/api/users/:userid', userController.FETCH_USER_DATA);
+app.get('/api/users/:userid', cache(3000), userController.FETCH_USER_DATA);
 app.put('/api/users/:userid', userController.UPDATE_USER_DATA);
+app.get('/api/jobs', AUTHENTICATE_TOKEN, cache(3000), jobsController.listJobs);
 /* -------------------------------- Navigations --------------------------------- */
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {

@@ -1,13 +1,25 @@
 // api calls
 async function fetchJobListings() {
     try {
-        const response = await fetch("http://localhost:3000/api/jobs");
+        // attach jwt auth token to fecth
+        const token = localStorage.getItem('swipe.match.hired-accessToken');
+        if (!token) {
+            alert("Please sign in or create an account");
+            throw new Error("User not authenticated");
+        }
+        const requestOptions = {
+            method: 'GET',
+            headers : {
+                'Authorization': `Bearer ${token}`,
+            }            
+        };
+        const response = await fetch("/api/jobs",requestOptions);
         if (!response.ok) {
             throw new Error("Failed to fetch job listings");
         }
         const data = await response.json();
-        console.log("Job Listings:", data);
-        return data;
+        console.log("Job Listings:", data.data);
+        return data.data;
     } catch (error) {
         console.error("Error fetching jobs:", error);
     }
@@ -72,7 +84,7 @@ function decodeAuthToken() {
 // fetchListings('Full Stack developer')
 async function fetchUserData(userId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/users/${userId}`);
+        const response = await fetch(`/api/users/${userId}`);
         if (!response.ok) {
             throw new Error("Failed to fetch user data");
         }

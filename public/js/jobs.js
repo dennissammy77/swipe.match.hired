@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded",async function(){
     const jobsContainer = document.getElementById("jobs-container");
-    const jobs = JSON.parse(localStorage.getItem('jobListings')) || await fetchListings().then(()=>window.location.reload());
+    //const jobs = JSON.parse(localStorage.getItem('jobListings')) || await fetchListings().then(()=>window.location.reload());
+    const jobs = await fetchJobListings();
     class SwiperHandler {
         constructor(container) {
             this.container = container;
