@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 location
             }
         };
-        fetch(`http://localhost:3000/api/users/${userId}`, {
+        fetch(`/api/users/${userId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

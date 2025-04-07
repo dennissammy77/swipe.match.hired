@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 email: email,
                 password: password
             };
-            fetch("http://localhost:3000/api/signin", {
+            fetch("/api/signin", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
