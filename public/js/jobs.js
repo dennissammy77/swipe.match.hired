@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded",async function(){
     const jobsContainer = document.getElementById("jobs-container");
-    //const jobs = JSON.parse(localStorage.getItem('jobListings')) || await fetchListings().then(()=>window.location.reload());
+    jobsContainer.innerHTML=`
+        <iframe src="https://lottie.host/embed/5896ca3d-2be5-4ad2-94f3-c3a0676447d3/XD6BLVwU0U.lottie"></iframe>
+    `
     const jobs = await fetchJobListings();
     class SwiperHandler {
         constructor(container) {
             this.container = container;
             this.setup();
-            this.savedJobListings = JSON.parse(localStorage.getItem('savedJobListings')) || [];
         }
         setup() {
-            this.container.innerHTML = ``;
-        
             // Create Swiper container
             this.swiperContainer = document.createElement('div');
             this.swiperContainer.classList.add('swiper');
@@ -21,6 +20,9 @@ document.addEventListener("DOMContentLoaded",async function(){
 
             // Append wrapper inside container
             this.swiperContainer.appendChild(this.swiperWrapper);
+        }
+        mount(){
+            this.container.innerHTML = ``;
             this.container.appendChild(this.swiperContainer);
         }
         addCard(job) {
@@ -125,7 +127,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             });
         }
     };
-
+    
     if (jobs && jobs.length > 0) {
         displayJobCards()
     } else {
@@ -140,6 +142,7 @@ document.addEventListener("DOMContentLoaded",async function(){
         jobs.forEach(job => {
             swiperController.addCard(job);
         });
+        swiperController.mount();
         // Initialize Swiper AFTER cards are added
         swiperController.initSwiper();
     }
