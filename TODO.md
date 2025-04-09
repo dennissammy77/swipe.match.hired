@@ -23,17 +23,20 @@
 - ✅ make job api calls from server instead of frontend
 - ✅ cache data for 5 min
 - ✅ Control viewing of jobs based on authenticated credentials
-- ⏳ set up middelwares
+- ⏳ set up access middelwares
 - ✅ save jobs to db
 - ✅ show saved jobs on job card
 - 🕓 remove jobs to db
 - ✅ view saved jobs page
 - ✅ On menu nav update the login button to profile linke
 - ✅ user guidelines (help page)
-- 🕓 View jobs details
+- ✅ loading status when fetching jobs data
+- 🕓 View jobs details / summary
+- 🕓 save resume file.
 - 🕓 is my resume tailored feature.
-- 🕓 loading status when fetching jobs data
+- 🕓 Track credits used per user
 - ⏳ logout user functionality, mobile screen to be implemented
+- 🕓 Toggle password visibility
 - 🕓 write a blog on how I built
 - 🕓 make a demo video
 - 🕓 track jobs saved
