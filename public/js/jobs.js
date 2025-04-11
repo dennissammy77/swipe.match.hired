@@ -114,10 +114,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             actionElement.addEventListener('click',()=>{
                 const infoContainer = document.getElementById("infoContainer");
                 infoContainer.classList.toggle('d-none');
-                infoContainer.style='z-index: 1000;top: 20%; right: 12.5%;color: var(--dark)'
-                infoContainer.querySelector(".infoContainerClose").addEventListener('click',()=>{
-                    infoContainer.classList.toggle('d-none');
-                })
+                infoContainer.style='z-index: 1000;top: 20%; right: 12.5%;color: var(--dark)';                
             })
 
             this.swiperContainer.appendChild(actionElement)
