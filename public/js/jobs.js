@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded",async function(){
         mount(){
             this.container.innerHTML = ``;
             this.container.appendChild(this.swiperContainer);
+            this.controls()
         }
         addCard(job) {
             const card = document.createElement('div');
@@ -105,6 +106,19 @@ document.addEventListener("DOMContentLoaded",async function(){
                 }, 800);
             }, 1000);
         };
+        controls(){
+            this.swiperContainer.style='position: relative'
+            const actionElement = document.createElement('h5');
+            actionElement.textContent='Show me how it works';
+            actionElement.style='position: absolute;bottom: -60px; left: 0px;cursor: pointer'
+            actionElement.addEventListener('click',()=>{
+                const infoContainer = document.getElementById("infoContainer");
+                infoContainer.classList.toggle('d-none');
+                infoContainer.style='z-index: 1000;top: 20%; right: 12.5%;color: var(--dark)';                
+            })
+
+            this.swiperContainer.appendChild(actionElement)
+        }
         formatTimestamp(timestamp) {
             let date = new Date(timestamp);
             let options = { 

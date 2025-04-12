@@ -56,6 +56,14 @@ function decodeAuthToken() {
     if (!token) return null;
     const payload = JSON.parse(atob(token.split('.')[1]));
     if (!payload) return null;
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+
+    if (payload.exp < currentTime) {
+        alert('Token has expired, Please sign In again!');
+        window.location.href='/signin';
+        localStorage.removeItem("swipe.match.hired-accessToken")
+        return 
+    }
     return payload;
 }
 // fetchListings('Full Stack developer')
