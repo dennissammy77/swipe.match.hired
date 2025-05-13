@@ -23,25 +23,36 @@
 - ✅ make job api calls from server instead of frontend
 - ✅ cache data for 5 min
 - ✅ Control viewing of jobs based on authenticated credentials
-- ⏳ set up access middelwares
 - ✅ save jobs to db
 - ✅ show saved jobs on job card
-- 🕓 remove jobs to db
 - ✅ view saved jobs page
 - ✅ On menu nav update the login button to profile linke
 - ✅ user guidelines (help page)
 - ✅ loading status when fetching jobs data
+### 10/04/2025
+- ✅ Add guidelines on how to use
+- ✅ write a blog on how I built
+- ✅ make a demo video
+### 12/04/2025
+- ⏳ set up access middelwares
+- 🕓 remove jobs to db
 - 🕓 View jobs details / summary
 - 🕓 save resume file.
 - 🕓 is my resume tailored feature.
 - 🕓 Track credits used per user
 - ⏳ logout user functionality, mobile screen to be implemented
 - 🕓 Toggle password visibility
-- 🕓 write a blog on how I built
-- 🕓 make a demo video
-- 🕓 track jobs saved
+- 🕓 track jobs saved/applied
 - 🕓 tracking analytics ; preferences, jobs, 
 - 🕓 Outline the job seeking approach ie focus on the networking approach
+- 🕓 Error observability 
+- 🕓 Notifications
+- 🕓 Ai finding matches
+- 🕓 Add payments .
+- 🕓 Tests .
+- 🕓 Get more Jobs .
+- 🕓 Add more filter params .
+- 🕓 Feedback forms .
 
 ## Features
 - 🕓set up rate limiters

@@ -13,7 +13,7 @@ const listJobs=async(req, res)=>{
             return res.status(400).json({error: true, message: 'Job title and location are required.'});
         };
         
-        const url = `https://linkedin-api8.p.rapidapi.com/search-jobs-v2?keywords=${jobTitle}&locationId=${location}&datePosted=anyTime&sort=mostRelevant`;
+        const url = `${process.env.RAPIDAPI_BASE_URL}/search-jobs-v2?keywords=${jobTitle}&locationId=${location}&datePosted=anyTime&sort=mostRelevant`;
         const options = {
             method: 'GET',
             headers: {
